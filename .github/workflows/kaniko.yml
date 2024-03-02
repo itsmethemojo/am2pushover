@@ -18,10 +18,18 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v2
+
+      # use custom checkout because default actions/checkout post cleanup will fail after kaniko wiping the container filesystem
+      - name: git checkout
+        run: >-
+          git clone "https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/${IMAGE_NAME}.git" custom-clone &&
+          cd custom-clone &&
+          git checkout ${GITHUB_SHA} &&
+          git log -1
 
       - name: kaniko build
         run: >-
+          cd custom-clone &&
           mkdir -p /kaniko/.docker/ &&
           echo "{\"auths\":{\"${{ env.REGISTRY }}\":{\"username\":\"${{ github.actor }}\",\"password\": \"${{ secrets.GITHUB_TOKEN }}\"}}}"  > /kaniko/.docker/config.json &&
           /kaniko/executor
