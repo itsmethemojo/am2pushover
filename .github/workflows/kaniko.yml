@@ -9,7 +9,7 @@ on:
 jobs:
   kaniko:
     runs-on: [ "self-hosted", "ARM64", "Linux" ]
-    container: ghcr.io/itsmethemojo/kaniko-github-actions-image:sha-034dcf8
+    container: ghcr.io/itsmethemojo/kaniko-github-actions-image:sha-27ca0d4
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
