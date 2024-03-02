@@ -1,0 +1,8 @@
+app:
+  nameOverride: am2pushover
+
+  image:
+    repository: ghcr.io/itsmethemojo/am2pushover
+    tag: "sha-b639139"
+
+  containerPort: 5001
