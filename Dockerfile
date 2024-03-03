@@ -18,6 +18,7 @@ FROM alpine
 RUN apk update && apk add git && apk add ca-certificates
 
 COPY --from=builder /root/am2pushover /root/
+COPY entrypoint.sh /root/
 EXPOSE 5001
-ENTRYPOINT ["/root/am2pushover", "-api_key", "$PUSHOVER_APIKEY", "-recipient", "$PUSHOVER_USERKEY"]
+ENTRYPOINT ["/bin/sh", "/root/entrypoint.sh"]
 
