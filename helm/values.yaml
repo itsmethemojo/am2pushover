@@ -3,6 +3,14 @@ app:
 
   image:
     repository: ghcr.io/itsmethemojo/am2pushover
-    tag: "sha-b639139"
+    tag: "sha-480fc33"
 
   containerPort: 5001
+
+  livenessProbe:
+    httpGet:
+      path: /metrics
+
+  readinessProbe:
+    httpGet:
+      path: /metrics
